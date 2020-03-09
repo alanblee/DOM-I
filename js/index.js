@@ -68,8 +68,8 @@ let secondAnchor = document.createElement("a");
 secondAnchor.textContent = "Home";
 navParent.appendChild(newChildAnchor).textContent = "Legal";
 navParent.prepend(secondAnchor);
-secondAnchor.style.color = "Green"
-newChildAnchor.style.color = "Green"
+secondAnchor.style.color = "Green";
+newChildAnchor.style.color = "Green";
 
 //CTA
 
@@ -136,3 +136,12 @@ for (let i = 0; i < contactSection.length; i++) {
 //Footer
 
 document.querySelector("footer p").textContent = siteContent.footer.copyright;
+
+//Stretch
+
+//cta btn to update the h1
+let updateBtn = document.querySelector(".cta-text button");
+updateBtn.addEventListener("click", e => {
+  let updateH1 = document.querySelector(".cta-text h1");
+  return (updateH1.textContent = "Updated from a click of a button");
+});
