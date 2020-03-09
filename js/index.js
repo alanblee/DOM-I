@@ -49,13 +49,30 @@ logo.setAttribute("src", siteContent["nav"]["img-src"]);
 //Element Selectors
 
 //Nav
+
 let navLinks = document.querySelectorAll("nav a");
 let navItems = siteContent.nav;
 navLinks.forEach((link, idx) => {
   link.textContent = navItems[`nav-item-${idx + 1}`];
 });
 
+//Color for Nav
+navLinks.forEach(link => {
+  link.style.color = "green";
+});
+
+//New Items for Nav
+let navParent = document.querySelector("nav");
+let newChildAnchor = document.createElement("a");
+let secondAnchor = document.createElement("a");
+secondAnchor.textContent = "Home";
+navParent.appendChild(newChildAnchor).textContent = "Legal";
+navParent.prepend(secondAnchor);
+secondAnchor.style.color = "Green"
+newChildAnchor.style.color = "Green"
+
 //CTA
+
 //cta h1
 let ctaH1 = document.querySelector(".cta-text h1");
 ctaH1.textContent = siteContent.cta.h1;
@@ -104,9 +121,9 @@ visionSection[0].textContent = siteContent["main-content"]["vision-h4"];
 visionSection[1].textContent = siteContent["main-content"]["vision-content"];
 
 //Contact
+
 let contactParent = document.querySelector(".contact");
 let contactSection = Array.from(contactParent.children);
-console.log(contactSection);
 let contactInfo = [];
 for (keys in siteContent.contact) {
   contactInfo.push(siteContent.contact[keys]);
@@ -117,4 +134,5 @@ for (let i = 0; i < contactSection.length; i++) {
 }
 
 //Footer
+
 document.querySelector("footer p").textContent = siteContent.footer.copyright;
