@@ -7,6 +7,7 @@ const getTimeParts = elapseTime => {
   const msHundreds = Math.floor(elapseTime / 100);
   elapseTime -= msHundreds * 100;
   const msTens = Math.floor(elapseTime / 10);
+
   return [secondTens, second, msHundreds, msTens];
 };
 
@@ -18,7 +19,7 @@ let secondTensDiv = document.getElementById("secondTens");
 let startPause = document.getElementById("start-stop");
 let resetBtn = document.getElementById("reset-btn");
 let clockOn = false;
-let timePassed=0;
+let timePassed = 0;
 let timer;
 
 startPause.addEventListener("click", e => {
@@ -27,21 +28,34 @@ startPause.addEventListener("click", e => {
     runTimer();
     e.target.textContent = "Stop";
   } else {
+    clockOn=false;
     window.clearInterval(timer);
     e.target.textContent = "Start";
   }
 });
 
 resetBtn.addEventListener("click", () => {
+  resetTimer();
   Array.from(document.querySelector(".digits").children).forEach(child => {
     if (child.id === "colon") {
       child.textContent = ":";
     } else {
       child.textContent = "-";
     }
+    Array.from(document.getElementsByClassName("digit")).forEach(child => {
+      child.style.color = "black";
+    });
   });
 });
 
+const resetTimer = () => {
+  clockOn = false;
+  timePassed = 0;
+  secondTensDiv.textContent = "-";
+  secondOnesDiv.textContent = "-";
+  msHundredsDiv.textContent = "-";
+  msTensDiv.textContent = "-";
+};
 const runTimer = () => {
   timer = setInterval(() => {
     timePassed += 10;
@@ -50,11 +64,14 @@ const runTimer = () => {
     secondOnesDiv.textContent = second;
     msHundredsDiv.textContent = msHundreds;
     msTensDiv.textContent = msTens;
+    //when timePassed is 10 seconds. stop the counter
     if (timePassed >= 10000) {
-      Array.from(document.getElementsByClassName("digit")).forEach(d => {
-        d.style.color = "red";
+      Array.from(document.getElementsByClassName("digit")).forEach(child => {
+        child.style.color = "red";
       });
       clearInterval(timer);
+      timePassed = 0;
+      clockOn = false;
     }
   }, 10);
 };
