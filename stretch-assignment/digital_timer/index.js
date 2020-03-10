@@ -23,9 +23,7 @@ let timer;
 
 startPause.addEventListener("click", e => {
   if (e.target.textContent === "Start") {
-    Array.from(document.getElementsByClassName("digit")).forEach(child => {
-      child.style.color = "black";
-    });
+    blackText();
     runTimer();
     e.target.textContent = "Stop";
   } else if (e.target.textContent === "Stop") {
@@ -45,12 +43,14 @@ resetBtn.addEventListener("click", () => {
     }
   });
 });
-
-const resetTimer = () => {
-  timePassed = 0;
+const blackText = () => {
   Array.from(document.getElementsByClassName("digit")).forEach(child => {
     child.style.color = "black";
   });
+};
+const resetTimer = () => {
+  timePassed = 0;
+  blackText();
 };
 const runTimer = () => {
   timer = setInterval(() => {
