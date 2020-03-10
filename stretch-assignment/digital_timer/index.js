@@ -18,17 +18,16 @@ let secondOnesDiv = document.getElementById("secondOnes");
 let secondTensDiv = document.getElementById("secondTens");
 let startPause = document.getElementById("start-stop");
 let resetBtn = document.getElementById("reset-btn");
-let clockOn = false;
 let timePassed = 0;
 let timer;
 
 startPause.addEventListener("click", e => {
-  clockOn = !clockOn;
-  if (clockOn) {
+  
+  if (e.target.textContent === "Start") {
     runTimer();
     e.target.textContent = "Stop";
-  } else {
-    clockOn=false;
+  } else if (e.target.textContent === "Stop") {
+    clockOn = false;
     window.clearInterval(timer);
     e.target.textContent = "Start";
   }
@@ -49,12 +48,7 @@ resetBtn.addEventListener("click", () => {
 });
 
 const resetTimer = () => {
-  clockOn = false;
   timePassed = 0;
-  secondTensDiv.textContent = "-";
-  secondOnesDiv.textContent = "-";
-  msHundredsDiv.textContent = "-";
-  msTensDiv.textContent = "-";
 };
 const runTimer = () => {
   timer = setInterval(() => {
@@ -71,7 +65,7 @@ const runTimer = () => {
       });
       clearInterval(timer);
       timePassed = 0;
-      clockOn = false;
+      startPause.textContent = "Start"
     }
   }, 10);
 };
